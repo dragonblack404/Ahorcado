@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="rootBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <HBox fx:id="gameHbox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="datosTextField" />
+            <Button fx:id="letraButton" mnemonicParsing="false" onAction="#onLetraButtonAction" text="Letra" />
+            <Button fx:id="resolverButton" mnemonicParsing="false" onAction="#onResolverButtonAction" text="Resolver" />
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <VBox fx:id="gameVbox" alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="ahorcadoViiew" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <image>
+                  <Image url="@../imagenes/10.png" />
+               </image></ImageView>
+            <Label fx:id="palabraLabel" text="Palabra" />
+            <Label fx:id="letrasLabael" text="Letras" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <right>
+      <GridPane fx:id="infoGridpane" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="-Infinity" minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" text="Puntos" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="jugadorLabel" text="Jugador:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="pointJugadorLabel" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Separator GridPane.columnSpan="3" GridPane.rowIndex="2" />
+            <Label text="Vidas:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="vidasLabel" text="0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Separator orientation="VERTICAL" GridPane.rowSpan="3" />
+         </children>
+      </GridPane>
+   </right>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</BorderPane>
