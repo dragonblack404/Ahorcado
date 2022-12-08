@@ -22,13 +22,12 @@ public class RootController implements Initializable {
 	
 	// controllers
 	
-	private PalabrasController palabrasController = new PalabrasController();
-	private PuntuacionesController puntuacionesController = new PuntuacionesController();
 	private PartidaController partidaController = new PartidaController();
+	private PuntuacionesController puntuacionesController = new PuntuacionesController();
+	private PalabrasController palabrasController = new PalabrasController();
 
 	// model
 	
-//	public static String PALABRA_ELEGIDA;
 	private ListProperty<String> palabras = new SimpleListProperty<>(FXCollections.observableArrayList());
 	private ListProperty<Puntuacion> puntuaciones = new SimpleListProperty<>(FXCollections.observableArrayList());
 	
@@ -52,8 +51,6 @@ public class RootController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		// tab content
 		
 		palabrasTab.setContent(palabrasController.getView());
 		partidaTab.setContent(partidaController.getView());
@@ -76,21 +73,10 @@ public class RootController implements Initializable {
 		});
 	}
 	
-	/**
-	 * elige la palabra para comenzar el juego
-	 */
-//	public void setPalabraElegida() {
-//		int random =(int) (Math.random() * palabras.getSize());
-//		RootController.PALABRA_ELEGIDA = palabras.get(random);
-//	}
-	
-	// partida
 	
 	public void cargarDatos() {
 		partidaController.cargarDatos();
 	}
-	
-	// palabras
 	
 	public final ListProperty<String> palabrasProperty() {
 		return this.palabras;
@@ -102,9 +88,7 @@ public class RootController implements Initializable {
 		this.palabrasProperty().set(palabras);
 	}
 
-	
-	// puntuaciones
-	
+		
 	public final ListProperty<Puntuacion> puntuacionesProperty() {
 		return this.puntuaciones;
 	}

@@ -26,7 +26,7 @@ public class PalabrasController implements Initializable {
 	// model
 
 	private ListProperty<String> palabras = new SimpleListProperty<>(FXCollections.observableArrayList());
-	private ObjectProperty<String> selected = new SimpleObjectProperty<>();
+	private ObjectProperty<String> seleccionada = new SimpleObjectProperty<>();
 	
 	// view
 
@@ -58,8 +58,8 @@ public class PalabrasController implements Initializable {
 		// bindings
 
 		palabrasList.itemsProperty().bind(palabras);
-		selected.bind(palabrasList.getSelectionModel().selectedItemProperty());
-		quitarButton.disableProperty().bind(selected.isNull());
+		seleccionada.bind(palabrasList.getSelectionModel().selectedItemProperty());
+		quitarButton.disableProperty().bind(seleccionada.isNull());
 
 	}
 
@@ -82,7 +82,7 @@ public class PalabrasController implements Initializable {
 	@FXML
 	void onQuitarAction(ActionEvent event) {
 		
-		palabras.remove(selected.get());
+		palabras.remove(seleccionada.get());
 		
 	}
 	

@@ -30,7 +30,6 @@ public class AhorcadoApp extends Application {
 	public void init() throws Exception {
 		System.out.println("inicializando...");
 
-		// cargar las palabras desde fichero
 		if (PALABRAS_FILE.exists()) {
 			palabras.addAll(
 				Files.readAllLines(
@@ -40,7 +39,6 @@ public class AhorcadoApp extends Application {
 			);
 		}
 		
-		// cargar puntuaciones desde fichero
 		if (PUNTUACIONES_FILE.exists()) {
 			puntuaciones.addAll(
 				Files.readAllLines(
@@ -64,8 +62,6 @@ public class AhorcadoApp extends Application {
 		rootController.puntuacionesProperty().bind(puntuaciones);
 		
 		rootController.cargarDatos();
-		// una vez cargadas las palabras eligo la palabra para el juego
-//		rootController.setPalabraElegida();
 	}
 	
 	@Override
@@ -82,7 +78,6 @@ public class AhorcadoApp extends Application {
 	@Override
 	public void stop() throws Exception {
 		System.out.println("terminando...");
-		// guardar las palabras en un fichero
 		final StringBuffer contenidoPalabras = new StringBuffer();
 		rootController.getPalabras().forEach(palabra -> contenidoPalabras.append(palabra + "\n"));
 		Files.writeString(
@@ -93,7 +88,6 @@ public class AhorcadoApp extends Application {
 				StandardOpenOption.TRUNCATE_EXISTING
 		);
 		
-		// guardar puntuaciones en un fichero
 		String contenidoPuntuaciones = "";
 		for(Puntuacion puntuacion:rootController.getPuntuaciones()) {
 			contenidoPuntuaciones += puntuacion.toCsvString();

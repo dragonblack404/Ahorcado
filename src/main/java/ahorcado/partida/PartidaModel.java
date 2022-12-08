@@ -22,58 +22,47 @@ public class PartidaModel {
 	
 	private ListProperty<String> palabras = new SimpleListProperty<>(FXCollections.observableArrayList());
 
+	private String nombre;
+	private String palabraElegidaBasica;
+	private StringProperty palabraElegida = new SimpleStringProperty("");
+
+	private IntegerProperty puntosGanados = new SimpleIntegerProperty();
+	private IntegerProperty puntosRestantes = new SimpleIntegerProperty();
+
 	private StringProperty intento = new SimpleStringProperty();
 	private StringProperty letrasProbadas = new SimpleStringProperty();
 	private StringProperty palabraElegidaEscondida = new SimpleStringProperty("");
-	
-	private IntegerProperty puntosGanados = new SimpleIntegerProperty();
-	private IntegerProperty puntosRestantes = new SimpleIntegerProperty();
 	
 	private BooleanProperty disableButtons = new SimpleBooleanProperty(false);
 	private BooleanProperty gameOver = new SimpleBooleanProperty();
 	
 	private ObjectProperty<Image> imagen = new SimpleObjectProperty<Image>();
 	
-	private String nombre;
-	private String palabraElegidaBasica;
-	private StringProperty palabraElegida = new SimpleStringProperty("");
 	
 	private int numFile;
 	
-	
-	public void setPalabraElegidaBasica() {
-		int random =(int) (Math.random() * palabras.getSize());
-		palabraElegidaBasica = palabras.get(random);
-//		System.out.println(palabraElegidaBasica);
-	}
-	
-	/**
-     * me preparo para meter la siguiente imagen, escondo la palabra y la meto en el modelo
-     */
-    public void cargarDatos() {
-    	
-    	setPalabraElegidaBasica();
+	public void cargarDatos() {
+		
+		setPalabraElegidaBasica();
 		setPalabraElegidaEscondida(esconderPalabra());
 		setPuntosRestantes(puntosPosibles());
 		buildPalabraElegida();
 		setLetrasProbadas("");
-    }
+	}
 	
-	/**
-	 * meto la palabra elegida en el modelo
-	 */
 	public void buildPalabraElegida() {
-    	int i;
+		int i;
 		for(i = 0; i < getPalabraElegidaBasica().length()-1; i++) {
 			addPalabraElegida(getPalabraElegidaBasica().charAt(i) + " ");
 		}
 		addPalabraElegida(getPalabraElegidaBasica().charAt(i) + "");
-    }
-	
-	/**
-	 * escondo la palabra y la guardo en el modelo
-	 * @return palabra escondida
-	 */
+	}
+
+	public void setPalabraElegidaBasica() {
+		int random =(int) (Math.random() * palabras.getSize());
+		palabraElegidaBasica = palabras.get(random);
+	}	
+		
 	protected String esconderPalabra() {
     	String result = "";
     	for(int i = 0; i < getPalabraElegidaBasica().length()-1; i++) {
@@ -87,9 +76,6 @@ public class PartidaModel {
     	return result;
     }
 	
-	/**
-	 * @return cantidad de puntos máximos posibles
-	 */
 	private int puntosPosibles() {
     	int result = 0;
     	for(int i = 0; i < getPalabraElegidaBasica().length(); i++) {
@@ -100,11 +86,6 @@ public class PartidaModel {
     	return result;
     }
 	
-	/**
-	 * compruebo si la letra está en la palabra elegida o no
-	 * @param intento
-	 * @param pc (PartidaController)
-	 */
 	protected void comprobarLetra(char intento) {
 		if(getPalabraElegida().contains(intento + "")) {
 			String aux = "";
@@ -130,9 +111,6 @@ public class PartidaModel {
 		
 	}
 	
-	/**
-	 * cuando falla modifica la imagen
-	 */
     protected void fail() {
     	if(getClass().getResource("/images/" + getNumFile() + ".png") != null)
     		setImagen(new Image(getClass().getResource("/images/" + getNumFile() + ".png").toString()));
@@ -144,9 +122,6 @@ public class PartidaModel {
     	
     }
     
-    /**
-     * cuando pierde establece los puntos, muestra la palabra, salta una pantalla y te dirige a endGame() 
-     */
     private void loose() {
     	
     	TextInputDialog dialog = new TextInputDialog();
@@ -159,9 +134,6 @@ public class PartidaModel {
     	endGame(nombre);
     }
     
-    /**
-     * cuando gana establece los puntos, muestra la palabra, salta una pantalla y te dirige a endGame() 
-     */
     protected void win() {
     	
     	setPuntosGanados(getPuntosGanados() + getPuntosRestantes());
@@ -171,20 +143,8 @@ public class PartidaModel {
     	
     	cargarDatos();
     	
-//    	TextInputDialog dialog = new TextInputDialog();
-//		dialog.initOwner(AhorcadoApp.primaryStage);
-//		dialog.setTitle("VICTORIA");
-//		dialog.setHeaderText("Has gando, danos tu nombre: ");
-//		dialog.setContentText("Nombre:");
-//		
-//		Optional<String> nombre = dialog.showAndWait();
-//    	endGame(nombre);
     }
     
-    /**
-     * cuando acaba la partida pregunto por el nombre del jugador (para meterlo en la pestaña puntuaciones)
-     * @param nombre
-     */
     private void endGame(Optional<String> nombre) {
     	if(nombre.isPresent() && !nombre.get().isBlank()) {
     		setNombre(nombre.get().trim());
@@ -275,7 +235,6 @@ public class PartidaModel {
 		this.nombre = nombre;
 	}
 	
-	// palabra elegida escondida
 	
 	public final StringProperty palabraElegidaEscondidaProperty() {
 		return this.palabraElegidaEscondida;
@@ -287,7 +246,6 @@ public class PartidaModel {
 		this.palabraElegidaEscondidaProperty().set(palabraElegidaEscondida);
 	}
 	
-	// palabra elegida
 
 	public final StringProperty palabraElegidaProperty() {
 		return this.palabraElegida;
@@ -302,8 +260,6 @@ public class PartidaModel {
 		setPalabraElegida(getPalabraElegida() + c);
 	}
 	
-	// palabras list
-
 	public final ListProperty<String> palabrasProperty() {
 		return this.palabras;
 	}
@@ -314,13 +270,9 @@ public class PartidaModel {
 		this.palabrasProperty().set(palabras);
 	}
 	
-	// palabra elegida básica
-	
 	public String getPalabraElegidaBasica() {
 		return palabraElegidaBasica;
 	}
-
-	// puntos restantes
 	
 	public final IntegerProperty puntosRestantesProperty() {
 		return this.puntosRestantes;

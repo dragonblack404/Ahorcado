@@ -66,9 +66,6 @@ public class PartidaController implements Initializable {
 		letrasProbadasLabel.textProperty().bind(model.letrasProbadasProperty());
 		textoEscondidoLabel.textProperty().bind(model.palabraElegidaEscondidaProperty());
 		puntosGanadosLabel.textProperty().bindBidirectional(model.puntosGanadosProperty(), new NumberStringConverter());
-//		
-//		model.setPalabraElegidaBasica();
-//		model.cargarDatos();
 	}
 	
 	@FXML
@@ -94,7 +91,6 @@ public class PartidaController implements Initializable {
     	model.setIntento("");
     }
     
-	// game over
 	
 	public BooleanProperty gameOverProperty() {
 		return model.gameOverProperty();
@@ -106,21 +102,15 @@ public class PartidaController implements Initializable {
 		return model.getNombre();
 	}
 	
-	// cargar datos
-	
 	public void cargarDatos() {
 		model.cargarDatos();
 		model.setNumFile(2);
 	}
 	
-	// palabras list
-	
 	public final ListProperty<String> palabrasProperty() {
 		return model.palabrasProperty();
 	}
-	
-	// view
-	
+		
     public BorderPane getView() {
 		return view;
 	}

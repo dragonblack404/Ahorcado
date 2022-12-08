@@ -46,11 +46,6 @@ public class PuntuacionesController implements Initializable {
 		
 	}
 	
-	/**
-	 * Añade una puntuación a la lista
-	 * @param nombre
-	 * @param puntuacion
-	 */
 	public void addPuntuacion(String nombre, int puntuacion) {
 		puntuaciones.add(new Puntuacion(nombre, puntuacion));
 	}
