@@ -28,8 +28,8 @@ public class RootController implements Initializable {
 
 	// model
 	
-	private ListProperty<String> palabras = new SimpleListProperty<>(FXCollections.observableArrayList());
-	private ListProperty<Puntuacion> puntuaciones = new SimpleListProperty<>(FXCollections.observableArrayList());
+	private ListProperty<String> palabrasList = new SimpleListProperty<>(FXCollections.observableArrayList());
+	private ListProperty<Puntuacion> puntuacionesList = new SimpleListProperty<>(FXCollections.observableArrayList());
 	
 	// view
 	
@@ -58,9 +58,9 @@ public class RootController implements Initializable {
 		
 		// bindings
 		
-		palabrasController.palabrasProperty().bind(palabras);
-		partidaController.palabrasProperty().bind(palabras);
-		puntuacionesController.puntuacionesProperty().bind(puntuaciones);
+		palabrasController.palabrasProperty().bind(palabrasList);
+		partidaController.palabrasProperty().bind(palabrasList);
+		puntuacionesController.puntuacionesProperty().bind(puntuacionesList);
 		
 		// listeners
 		
@@ -79,7 +79,7 @@ public class RootController implements Initializable {
 	}
 	
 	public final ListProperty<String> palabrasProperty() {
-		return this.palabras;
+		return this.palabrasList;
 	}
 	public final ObservableList<String> getPalabras() {
 		return this.palabrasProperty().get();
@@ -90,7 +90,7 @@ public class RootController implements Initializable {
 
 		
 	public final ListProperty<Puntuacion> puntuacionesProperty() {
-		return this.puntuaciones;
+		return this.puntuacionesList;
 	}
 	public final ObservableList<Puntuacion> getPuntuaciones() {
 		return this.puntuacionesProperty().get();

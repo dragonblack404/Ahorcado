@@ -23,8 +23,8 @@ public class PartidaModel {
 	private ListProperty<String> palabras = new SimpleListProperty<>(FXCollections.observableArrayList());
 
 	private String nombre;
-	private String palabraElegidaBasica;
-	private StringProperty palabraElegida = new SimpleStringProperty("");
+	private String palabraElegida;
+	private StringProperty palabraElegidaProperty = new SimpleStringProperty("");
 
 	private IntegerProperty puntosGanados = new SimpleIntegerProperty();
 	private IntegerProperty puntosRestantes = new SimpleIntegerProperty();
@@ -60,7 +60,7 @@ public class PartidaModel {
 
 	public void setPalabraElegidaBasica() {
 		int random =(int) (Math.random() * palabras.getSize());
-		palabraElegidaBasica = palabras.get(random);
+		palabraElegida = palabras.get(random);
 	}	
 		
 	protected String esconderPalabra() {
@@ -139,7 +139,7 @@ public class PartidaModel {
     	setPuntosGanados(getPuntosGanados() + getPuntosRestantes());
     	setPalabraElegidaEscondida("");
     	setPalabraElegida("");
-    	palabraElegidaBasica = "";
+    	palabraElegida = "";
     	
     	cargarDatos();
     	
@@ -248,7 +248,7 @@ public class PartidaModel {
 	
 
 	public final StringProperty palabraElegidaProperty() {
-		return this.palabraElegida;
+		return this.palabraElegidaProperty;
 	}
 	public final String getPalabraElegida() {
 		return this.palabraElegidaProperty().get();
@@ -271,7 +271,7 @@ public class PartidaModel {
 	}
 	
 	public String getPalabraElegidaBasica() {
-		return palabraElegidaBasica;
+		return palabraElegida;
 	}
 	
 	public final IntegerProperty puntosRestantesProperty() {

@@ -26,7 +26,19 @@ public class PalabrasController implements Initializable {
 	// model
 
 	private ListProperty<String> palabras = new SimpleListProperty<>(FXCollections.observableArrayList());
-	private ObjectProperty<String> seleccionada = new SimpleObjectProperty<>();
+	private ObjectProperty<String> select = new SimpleObjectProperty<>();
+	
+	public final ListProperty<String> palabrasProperty() {
+		return this.palabras;
+	}
+
+	public final ObservableList<String> getPalabras() {
+		return this.palabrasProperty().get();
+	}
+
+	public final void setPalabras(final ObservableList<String> palabras) {
+		this.palabrasProperty().set(palabras);
+	}
 	
 	// view
 
@@ -58,8 +70,8 @@ public class PalabrasController implements Initializable {
 		// bindings
 
 		palabrasList.itemsProperty().bind(palabras);
-		seleccionada.bind(palabrasList.getSelectionModel().selectedItemProperty());
-		quitarButton.disableProperty().bind(seleccionada.isNull());
+		select.bind(palabrasList.getSelectionModel().selectedItemProperty());
+		quitarButton.disableProperty().bind(select.isNull());
 
 	}
 
@@ -82,22 +94,10 @@ public class PalabrasController implements Initializable {
 	@FXML
 	void onQuitarAction(ActionEvent event) {
 		
-		palabras.remove(seleccionada.get());
+		palabras.remove(select.get());
 		
 	}
 	
-	public final ListProperty<String> palabrasProperty() {
-		return this.palabras;
-	}
-
-	public final ObservableList<String> getPalabras() {
-		return this.palabrasProperty().get();
-	}
-
-	public final void setPalabras(final ObservableList<String> palabras) {
-		this.palabrasProperty().set(palabras);
-	}
-
 	public BorderPane getView() {
 		return view;
 	}
